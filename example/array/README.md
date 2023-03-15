@@ -1,4 +1,4 @@
-## Array   
+# Array 1   
 You were given the following negative array. write a program that converts each array element to its positive representation. Then add all these array elements and assign them to the dl register. 
 
 .data
@@ -7,6 +7,7 @@ You were given the following negative array. write a program that converts each 
      ; Write the rest of the program and paste the fully working code in the space below.  
 As shown in the image, the dl register should have the value 22 after summing up all elements in the array. 
 
+### Example 1   
 ```
 .386
 .model flat,stdcall
@@ -80,3 +81,5 @@ invoke ExitProcess, 0
 main endp
 end main
 ```
+
+
