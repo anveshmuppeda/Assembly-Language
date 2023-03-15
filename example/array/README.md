@@ -32,4 +32,51 @@ invoke ExitProcess,0
 end main
 ```
 
+### Example 2   
+```
+.386
+.model flat, stdcall
+.stack 4096
+ExitProcess proto, dwExitCode : dword
+.data
+    myarr sbyte -5, -6, -7, -4
+.code
+    main proc
+    neg myarr
+    neg myarr+1
+    neg myarr+2
+    neg myarr+3
+    mov dl, myarr
+    add dl, myarr+1
+    add dl, myarr+2
+    add dl, myarr+3
 
+invoke ExitProcess, 0
+main endp
+end main
+```
+
+### Example 2   
+```
+; Another way of doing the same using a LOOP
+.386
+.model flat, stdcall
+.stack 4096
+ExitProcess proto, dwExitCode : dword
+.data
+    myarr sbyte -5, -6, -7, -4
+.code
+    main proc
+    mov ecx, lengthof myarr 
+    mov eax, 0
+    mov dl, 0
+    top:
+        neg [myarr+eax]
+        add dl, [myarr+eax]
+        inc eax
+    loop top
+
+invoke ExitProcess, 0
+main endp
+end main
+```
