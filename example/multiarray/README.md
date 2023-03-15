@@ -71,3 +71,51 @@ invoke ExitProcess, 0
 main endp
 end main
 ```
+
+### Example 3   
+```
+.386                                     
+.model flat,stdcall                     
+.stack 4096                             
+ExitProcess PROTO, dwExitcode:DWORD     
+
+INCLUDE Irvine32.inc
+
+.data
+
+    apples dword 42, 47, 52, 63, 74, 34, 73
+    oranges dword 78, 53, 86, 26, 46, 51, 60
+    mangos dword 30, 39, 41, 70, 75, 84, 29
+    
+
+.code
+main proc
+    
+    mov EAX, 0
+    
+    mov ebx, OFFSET apples
+    call FUNCT
+
+    mov ebx, OFFSET oranges
+    call FUNCT
+
+    mov ebx, OFFSET mangos
+    call FUNCT
+
+    
+invoke ExitProcess, 0
+main ENDP
+
+FUNCT proc
+    mov ECX, 6
+    add EAX, [ebx]
+    L1:
+        add EAX, [ebx+ecx*4]        
+    LOOP L1
+
+    ret
+FUNCT ENDP
+
+END main
+
+```
